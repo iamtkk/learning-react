@@ -47,47 +47,54 @@ const initialState = {
   ],
 };
 
-const todos = handleActions({
-  [CHANGE_INPUT]: (state, action) => ({ ...state, input: action.payload }),
-  [INSERT]: (state, action) => ({
-    ...state,
-    todos: state.todos.concat(action.payload),
-  }),
-  [TOGGLE]: (state, action) => ({
-    ...state,
-    todos: state.todos.map((todo) =>
-      todo.id === action.payload ? { ...todo, done: !todo.done } : todo
-    ),
-  }),
-});
+const todos = handleActions(
+  {
+    [CHANGE_INPUT]: (state, { payload: input }) => ({ ...state, input }),
+    [INSERT]: (state, { payload: todo }) => ({
+      ...state,
+      todos: state.todos.concat(todo),
+    }),
+    [TOGGLE]: (state, { payload: id }) => ({
+      ...state,
+      todos: state.todos.map((todo) =>
+        todo.id === id ? { ...todo, done: !todo.done } : todo
+      ),
+    }),
+    [REMOVE]: (state, { payload: id }) => ({
+      ...state,
+      todos: state.todos.filter((todo) => todo.id !== id),
+    }),
+  },
+  initialState
+);
 
-function todos(state = initialState, action) {
-  switch (action.type) {
-    case CHANGE_INPUT:
-      return {
-        ...state, // 불변성을 유지를 해 주어야 합니다.
-        input: action.input,
-      };
-    case INSERT:
-      return {
-        ...state,
-        todos: state.todos.concat(action.todo),
-      };
-    case TOGGLE:
-      return {
-        ...state,
-        todos: state.todos.map((todo) =>
-          todo.id === action.id ? { ...todo, done: !todo.done } : todo
-        ),
-      };
-    case REMOVE:
-      return {
-        ...state,
-        todos: state.todos.filter((todo) => todo.id !== action.id),
-      };
-    default:
-      return state;
-  }
-}
+// function todos(state = initialState, action) {
+//   switch (action.type) {
+//     case CHANGE_INPUT:
+//       return {
+//         ...state, // 불변성을 유지를 해 주어야 합니다.
+//         input: action.input,
+//       };
+//     case INSERT:
+//       return {
+//         ...state,
+//         todos: state.todos.concat(action.todo),
+//       };
+//     case TOGGLE:
+//       return {
+//         ...state,
+//         todos: state.todos.map((todo) =>
+//           todo.id === action.id ? { ...todo, done: !todo.done } : todo
+//         ),
+//       };
+//     case REMOVE:
+//       return {
+//         ...state,
+//         todos: state.todos.filter((todo) => todo.id !== action.id),
+//       };
+//     default:
+//       return state;
+//   }
+// }
 
 export default todos;
