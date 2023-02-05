@@ -11,6 +11,7 @@ import reportWebVitals from "./reportWebVitals";
 // import rootReducer from './modules';
 
 const store = createStore(rootReducer, composeWithDevTools());
+// const store = createStore(rootReducer);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
