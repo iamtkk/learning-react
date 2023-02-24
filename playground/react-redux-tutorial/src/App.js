@@ -7,8 +7,8 @@ function App() {
   return (
     <div>
       <CounterContainer />
-      {/* <hr />
-      <TodosContainer /> */}
+      <hr />
+      <TodosContainer />
     </div>
   );
 }

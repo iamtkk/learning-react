@@ -1,5 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
+import { increase } from './counter';
 
 const CHANGE_INPUT = 'todos/CHANGE_INPUT'; // 인풋 값을 변경함
 const INSERT = 'todos/INSERT'; // 새로운 todo 를 등록함
@@ -76,10 +77,18 @@ const todos = handleActions(
 // const todos = handleActions(
 //   {
 //     [CHANGE_INPUT]: (state, { payload: input }) => ({ ...state, input }),
-//     [INSERT]: (state, { payload: todo }) => ({
-//       ...state,
-//       todos: state.todos.concat(todo),
-//     }),
+//     // [INSERT]: (state, { payload: todo }) => ({
+//     //   ...state,
+//     //   todos: state.todos.concat(todo),
+//     // }),
+//     [INSERT]: (state, action) => (
+//       console.log('action', action),
+//       console.log('action.payload', action.payload),
+//       {
+//         ...state,
+//         todos: state.todos.concat(action.payload),
+//       }
+//     ),
 //     [TOGGLE]: (state, { payload: id }) => ({
 //       ...state,
 //       todos: state.todos.map((todo) =>
